@@ -1,7 +1,15 @@
+import ImageCard from "@/components/imagecard";
+
 export default function Page() {
   return (
-    <div className="text-3xl font-bold underline bg-gray-500">
-      Hello, Next.js!
+    <div className="">
+      <ImageCard></ImageCard>
+      <section>
+        <p className="font-semibold text-2xl">Featured Posts</p>
+      </section>
+      <section>
+        <p className="font-semibold text-2xl">You may like</p>
+      </section>
     </div>
   );
 }

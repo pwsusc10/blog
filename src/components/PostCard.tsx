@@ -6,7 +6,7 @@ import React from "react";
 export default function PostCard({ post }: { post: Post }) {
   return (
     <Link href={`/posts/${post.path}`}>
-      <article className="overflow-hidden rounded-lg shadow-lg">
+      <article className="overflow-hidden rounded-lg shadow-md m-3 hover:shadow-xl">
         <Image
           src={`/images/posts/${post.path}.png`}
           alt="post"
@@ -15,7 +15,9 @@ export default function PostCard({ post }: { post: Post }) {
           className="w-full"
         />
         <div className="flex flex-col items-center p-4">
-          <time className="self-end text-xs">{post.date.toString()}</time>
+          <time className="self-end text-xs text-gray-700">
+            {post.date.toString()}
+          </time>
           <h2 className="text-lg font-bold">{post.title}</h2>
           <p className="w-full truncate text-center">{post.description}</p>
           <span className="bg-teal-200 rounded-full px-2 my-2 text-sm">

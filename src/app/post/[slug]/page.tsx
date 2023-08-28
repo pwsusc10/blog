@@ -3,13 +3,13 @@ import React from "react";
 import ReactMarkdown from "react-markdown";
 
 export default function BlogPage() {
-  const temp = "## Hello, *world*!";
+  // const temp = "## Hello, *world*!";
 
   getPosts();
   return (
     <div>
       BlogPage
-      <ReactMarkdown children={temp} />
+      {/* <ReactMarkdown children={temp} /> */}
     </div>
   );
 }

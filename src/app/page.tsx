@@ -1,15 +1,15 @@
+import CarouselPosts from "@/components/CarouselPosts";
 import FeaturedPosts from "@/components/FeaturedPosts";
 import Hero from "@/components/Hero";
+import YouMayLike from "@/components/YouMayLike";
 
 export default function HomePage() {
   return (
     <section>
       <Hero />
-      {/* @ts-expect-error Server Component */}
       <FeaturedPosts />
-      <section>
-        <p className="font-semibold text-2xl">You may like</p>
-      </section>
+      <CarouselPosts />
+      {/* <YouMayLike /> */}
     </section>
   );
 }

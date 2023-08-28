@@ -1,4 +1,4 @@
-import ImageCard from "@/components/imagecard";
+import ImageCard from "@/components/Hero";
 
 export default function AboutPage() {
   return (

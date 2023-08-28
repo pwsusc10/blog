@@ -1,15 +1,15 @@
-import ImageCard from "@/components/imagecard";
+import FeaturedPosts from "@/components/FeaturedPosts";
+import Hero from "@/components/Hero";
 
-export default function Page() {
+export default function HomePage() {
   return (
-    <div className="">
-      <ImageCard></ImageCard>
-      <section>
-        <p className="font-semibold text-2xl">Featured Posts</p>
-      </section>
+    <section>
+      <Hero />
+      {/* @ts-expect-error Server Component */}
+      <FeaturedPosts />
       <section>
         <p className="font-semibold text-2xl">You may like</p>
       </section>
-    </div>
+    </section>
   );
 }

@@ -1,7 +1,9 @@
-import MarkdownViewer from "@/components/MarkdownViewer";
-import { getPostByPath } from "@/service/posts";
+import { getAllPosts, getPostData } from "@/service/posts";
 import Image from "next/image";
 import React from "react";
+import ExtraPage from "@/components/AdjacentPostCard";
+import PostContent from "@/components/PostContent";
+import AdjacentPostCard from "@/components/AdjacentPostCard";
 
 type Props = {
   params: {
@@ -10,20 +12,26 @@ type Props = {
 };
 
 export default async function BlogPage({ params }: Props) {
-  const { title, description, date, path, content } = await getPostByPath(
-    params.slug
-  );
+  const posts = await getAllPosts();
+
+  const post = await getPostData(params.slug);
+  const { title, path, next, prev } = post;
 
   return (
-    <article>
+    <article className="rounded-2xl overflow-hidden bg-gray-100 shadow-lg m-4">
       <Image
+        className="w-full h-1/5 max-h-[500px]"
         src={`/images/posts/${path}.png`}
         alt={title}
-        width="760"
-        height="420"
+        width={760}
+        height={420}
       />
-      <h1>{title}</h1>
-      <MarkdownViewer content={content} />
+      <PostContent post={post} />
+      <section className="flex shadow-md">
+        {prev && <AdjacentPostCard post={prev} type="prev" />}
+        {next && <AdjacentPostCard post={next} type="next" />}
+      </section>
+      {/* <ExtraPage prev={posts[targetIndex - 1]} next={posts[targetIndex + 1]} /> */}
     </article>
   );
 }

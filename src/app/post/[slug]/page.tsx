@@ -1,6 +1,7 @@
+import MarkdownViewer from "@/components/MarkdownViewer";
 import { getPostByPath } from "@/service/posts";
+import Image from "next/image";
 import React from "react";
-import { ReactMarkdown } from "react-markdown/lib/react-markdown";
 
 type Props = {
   params: {
@@ -9,9 +10,20 @@ type Props = {
 };
 
 export default async function BlogPage({ params }: Props) {
-  console.log(params.slug);
-  const data = await getPostByPath(params.slug);
+  const { title, description, date, path, content } = await getPostByPath(
+    params.slug
+  );
 
-  // return <div>{data}</div>
-  return <ReactMarkdown>{data.content}</ReactMarkdown>;
+  return (
+    <article>
+      <Image
+        src={`/images/posts/${path}.png`}
+        alt={title}
+        width="760"
+        height="420"
+      />
+      <h1>{title}</h1>
+      <MarkdownViewer content={content} />
+    </article>
+  );
 }

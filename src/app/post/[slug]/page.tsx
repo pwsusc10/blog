@@ -1,15 +1,17 @@
-import { getPosts } from "@/service/temp";
+import { getPostByPath } from "@/service/posts";
 import React from "react";
-import ReactMarkdown from "react-markdown";
+import { ReactMarkdown } from "react-markdown/lib/react-markdown";
 
-export default function BlogPage() {
-  // const temp = "## Hello, *world*!";
+type Props = {
+  params: {
+    slug: string;
+  };
+};
 
-  getPosts();
-  return (
-    <div>
-      BlogPage
-      {/* <ReactMarkdown children={temp} /> */}
-    </div>
-  );
+export default async function BlogPage({ params }: Props) {
+  console.log(params.slug);
+  const data = await getPostByPath(params.slug);
+
+  // return <div>{data}</div>
+  return <ReactMarkdown>{data.content}</ReactMarkdown>;
 }

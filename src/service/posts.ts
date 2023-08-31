@@ -10,6 +10,8 @@ export type Post = {
   featured: boolean;
 };
 
+export type PostData = Post & { content: string };
+
 export async function getAllPosts(): Promise<Post[]> {
   const filePath = path.join(process.cwd(), "data", "posts.json");
   const data = await fs
@@ -20,8 +22,22 @@ export async function getAllPosts(): Promise<Post[]> {
   return data;
 }
 
-export async function getPost(title: string): Promise<Post | undefined> {
-  const products = await getAllPosts();
+export async function getCategories(): Promise<string[]> {
+  const posts = await getAllPosts();
+  let categories: string[] = ["All Posts"];
 
-  return products.find((post) => post.title === title);
+  posts.map((post) => {
+    if (categories.find((category) => category === post.category) === undefined)
+      categories.push(post.category);
+  });
+  return categories;
+}
+
+export async function getPostByPath(source: string): Promise<PostData> {
+  const postPath = path.join(process.cwd(), "data", "posts", `${source}.md`);
+  const metadata = await getAllPosts() //
+    .then((posts) => posts.find((post) => post.path === source));
+  if (!metadata) throw new Error(`${source}에 해당하는 포스트를 찾을 수 없음`);
+  const content = await fs.readFile(postPath, "utf-8");
+  return { ...metadata, content };
 }

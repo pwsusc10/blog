@@ -1,7 +1,6 @@
 "use client";
 
 import { sendContactEmail } from "@/service/contact";
-import { EmailData, sendEmail } from "@/service/email";
 import { ChangeEvent, FormEvent, useState } from "react";
 import Banner, { BannerData } from "./Banner";
 
@@ -9,6 +8,12 @@ type Form = {
   from: string;
   subject: string;
   message: string;
+};
+
+const DEFAULT_DATA = {
+  from: "",
+  subject: "",
+  message: "",
 };
 
 export default function MailForm() {
@@ -26,22 +31,23 @@ export default function MailForm() {
 
   const onSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const data: EmailData = form;
 
     // server에 mail post 요청
-    sendContactEmail(data)
-      .then((data) => {
-        console.log(data);
-        setBannerData({ message: "성공!", state: "success" });
+    sendContactEmail(form)
+      .then((res) => {
+        console.log(res);
+        setBannerData({ message: `${res.message}`, state: "success" });
+        setForm(DEFAULT_DATA);
       })
       .catch((err) => {
         console.log(err);
-        setBannerData({ message: "실패!", state: "fail" });
+        setBannerData({ message: `${err.message}`, state: "fail" });
+      })
+      .finally(() => {
+        setTimeout(() => {
+          setBannerData(null);
+        }, 3000);
       });
-
-    setTimeout(() => {
-      setBannerData(null);
-    }, 3000);
   };
   return (
     <section className="w-full max-w-lg">

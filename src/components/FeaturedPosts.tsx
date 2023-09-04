@@ -1,4 +1,3 @@
-import PostCard from "@/components/PostCard";
 import { getAllPosts } from "@/service/posts";
 import React from "react";
 import PostsGrid from "./PostsGrid";

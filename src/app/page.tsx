@@ -1,7 +1,6 @@
 import CarouselPosts from "@/components/CarouselPosts";
 import FeaturedPosts from "@/components/FeaturedPosts";
 import Hero from "@/components/Hero";
-import YouMayLike from "@/components/YouMayLike";
 
 export default function HomePage() {
   return (
@@ -9,7 +8,6 @@ export default function HomePage() {
       <Hero />
       <FeaturedPosts />
       <CarouselPosts />
-      {/* <YouMayLike /> */}
     </section>
   );
 }

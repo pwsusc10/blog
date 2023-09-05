@@ -26,9 +26,10 @@ export async function POST(req: Request) {
           status: 200,
         })
     )
-    .catch((err) => {
-      return new Response(JSON.stringify({ message: "메일 전송 실패" }), {
-        status: 500,
-      });
-    });
+    .catch(
+      (err) =>
+        new Response(JSON.stringify({ message: "메일 전송 실패" }), {
+          status: 500,
+        })
+    );
 }

@@ -1,15 +1,23 @@
 import { getAllPosts, getPostData } from "@/service/posts";
 import Image from "next/image";
 import React from "react";
-import ExtraPage from "@/components/AdjacentPostCard";
 import PostContent from "@/components/PostContent";
 import AdjacentPostCard from "@/components/AdjacentPostCard";
+import { Metadata } from "next";
 
 type Props = {
   params: {
     slug: string;
   };
 };
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { title, description } = await getPostData(params.slug);
+  return {
+    title,
+    description,
+  };
+}
 
 export default async function BlogPage({ params }: Props) {
   const posts = await getAllPosts();
@@ -34,4 +42,10 @@ export default async function BlogPage({ params }: Props) {
       {/* <ExtraPage prev={posts[targetIndex - 1]} next={posts[targetIndex + 1]} /> */}
     </article>
   );
+}
+
+export async function generateStaticParams() {
+  const posts = await getAllPosts();
+  const featuredPosts = posts.filter((post) => post.featured == true);
+  return featuredPosts.map((post) => ({ slug: post.path }));
 }

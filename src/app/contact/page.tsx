@@ -1,5 +1,11 @@
 import MailForm from "@/components/mailForm";
 import { SiGithub, SiNaver, SiGoogle } from "react-icons/si";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Contact Me",
+  description: "성표에게 연락하기",
+};
 
 const LINKS = [
   { icon: <SiGithub />, url: "" },

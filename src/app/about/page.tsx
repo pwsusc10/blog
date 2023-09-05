@@ -1,4 +1,10 @@
 import ImageCard from "@/components/Hero";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "About Me",
+  description: "성표의 소개",
+};
 
 const TITLE_CLASS = "font-bold text-2xl text-gray-800";
 export default function AboutPage() {

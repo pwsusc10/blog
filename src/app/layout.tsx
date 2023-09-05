@@ -7,8 +7,11 @@ import Footer from "@/components/Footer";
 const sans = Open_Sans({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "성표의 blog",
+  title: { default: "성표의 blog", template: "성표의 blog | %s" },
   description: "성표가 뭐하는 지 훔쳐보기",
+  icons: {
+    icon: "/favicon.ico",
+  },
 };
 
 export default function RootLayout({

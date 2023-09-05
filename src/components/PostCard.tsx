@@ -5,7 +5,7 @@ import React from "react";
 
 export default function PostCard({ post }: { post: Post }) {
   return (
-    <Link href={`/posts/${post.path}`}>
+    <Link href={`/post/${post.path}`}>
       <article className="overflow-hidden rounded-lg shadow-md m-3 hover:shadow-xl">
         <Image
           src={`/images/posts/${post.path}.png`}
